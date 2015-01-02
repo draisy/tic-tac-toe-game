@@ -23,10 +23,13 @@ class Computer
   # find and perform the next move for a player, return true if game is over
   def next_move
     minimax(self.id)
+
     @board.board[@choice] = id
     @board.free.delete(@choice)
-    puts "player #{id} chooses #{@choice}"
+
+    puts "player #{id + 1} chooses #{@choice}"
     puts board
+
     board.free.empty? || board.winner
   end
 

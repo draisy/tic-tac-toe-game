@@ -1,4 +1,6 @@
 require './app/config/environment.rb'
 
+use Rack::Static, :urls => ['/stylesheets', '/js'], :root => 'public'
 use Rack::MethodOverride
-run Sinatra::Application
+use RootController
+run TictactoeController
