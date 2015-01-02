@@ -25,6 +25,7 @@ class Computer
     minimax(self.id)
 
     @board.board[@choice] = id
+    
     @board.free.delete(@choice)
 
     puts "player #{id + 1} chooses #{@choice}"

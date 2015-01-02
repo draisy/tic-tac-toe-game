@@ -60,10 +60,9 @@ $(document).ready(function(){
     var position = $(this).data("pos");
     var cell = this;
 
-    alert("clicked");
         $.ajax({
         type: "GET",
-        url: "/value",
+        url: "/play",
         data: { 'val': position },
         success: function(){
           changeCell(cell); 

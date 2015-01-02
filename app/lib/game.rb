@@ -1,12 +1,15 @@
 class Game
   VALID_TYPES = [1, 2]
-  
+
   attr_accessor :player1, :player2
 
   def initialize
     @board = Board.new
-    set_player_types
-    start
+   # set_player_types
+   @player1 = Player.new(@board)
+   @player2 = Computer.new(@board)
+    #start
+    start_game
   end
 
   def set_player_types
@@ -37,6 +40,9 @@ class Game
       break if @player1.next_move
       break if @player2.next_move
     end
+  end
+
+  def start_game
   end
 
 end

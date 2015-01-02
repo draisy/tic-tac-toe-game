@@ -11,10 +11,10 @@ class Player
   # find and perform the next move for a player, return true if game is over
   def next_move
 
-    while !@board.validate(@choice)
-      puts "Please enter a (valid free) space to play on:"
-      @choice = gets.strip!.to_i - 1
-    end
+    # while !@board.validate(@choice)
+    #   puts "Please enter a (valid free) space to play on:"
+    #   @choice = gets.strip!.to_i - 1
+    # end
 
     @board.board[@choice] = id
     @board.free.delete(@choice)
