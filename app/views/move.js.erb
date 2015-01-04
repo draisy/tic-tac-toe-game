@@ -1,1 +1,72 @@
-$('#box' + <%= @choice %>).addClass('blue');
+//when assign var to function and when not?
+
+var cell = $('#box' + <%= @choice %>);
+changeCell(cell);
+
+var winner = checkWinner();
+if (winner){
+  var message = getMessage(winner);
+  endGame(message);
+}
+
+
+function checkWinner(){
+  if (<%= @won ? @won : @won = false %>) {
+    var winner = "tie";
+    if(<%= @won %> === <%= @player1.id %>) {
+      winner = <%= @player1.id %>
+    }
+    else {
+      winner = <%= @player2.id %>
+    }
+  };
+  return winner;
+};
+
+function getMessage(winner){
+  if (winner === "tie"){
+    return "It's a draw!";
+  }
+  else {
+    return "Player " + winner + " wins!"
+  }
+};
+
+function endGame(message) {
+  alert(message);
+  location.reload();
+}
+
+
+// Keep track of whose turn it is
+var turn = {
+  number : 0,
+  currentPlayerColor : function() {
+    if (this.number % 2 === 0) {
+      return 1;
+    }
+    else {
+      return 2;
+    }
+  },
+  changeTurn : function(){
+    this.number += 1;
+  }
+};
+
+
+function changeCell(cell) {
+
+  // Change cell to the player color
+  if (turn.currentPlayerColor() == 2){
+    // Remove hover class immediately once clicked
+    $(".box_cell").click(function () {
+      $(this).removeClass("hover");
+    });
+    $(cell).addClass('blue');
+   }
+   else {
+    $(cell).addClass('red');
+  }
+  turn.changeTurn();
+}

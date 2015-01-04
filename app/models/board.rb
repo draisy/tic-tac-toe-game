@@ -14,6 +14,7 @@ class Board
     end.join
   end
 
+  #for CLI input
   def validate(choice)
     @free.include?(choice)
   end

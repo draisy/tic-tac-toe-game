@@ -35,6 +35,8 @@ function changeCell(cell) {
   var pos = $(cell).data("pos");
 
   board[pos] = turn.currentPlayerColor();
+
+  console.log(turn.currentPlayerColor());
   if (turn.currentPlayerColor() == 1){
     // Remove hover class immediately once clicked
     $(".box_cell").click(function () {
@@ -45,6 +47,7 @@ function changeCell(cell) {
   else {
     $(cell).addClass('blue');
   }
+  turn.changeTurn();
 }
 
 $(document).ready(function(){
@@ -59,13 +62,14 @@ $(document).ready(function(){
   $('.box_cell').click(function(){
     var position = $(this).data("pos");
     var cell = this;
-
+    changeCell(cell); 
+    console.log("player" + cell);
         $.ajax({
         type: "GET",
         url: "/play",
         data: { 'val': position },
         success: function(){
-          changeCell(cell); 
+        //change color
         }
       });
     // Check if cell is 0 on the board
