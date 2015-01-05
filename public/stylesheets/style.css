@@ -1,6 +1,7 @@
 body {
   width: 100%;
-  background-image:url('../img/wavegrid.png');
+  background-image:url('/../images/crossword.png');
+  background-position: top center;
 }
 
 #main_container {
@@ -10,31 +11,51 @@ body {
 
 .heading {
   text-align: center;
-  font-family: 'Finger Paint', cursive;
+  font-family: 'Permanent Marker', cursive;
   font-size: 50px;
+  color: #66a580 ;
+  margin: 10px 0;
+}
+
+p {
+  font-family: Sans-Serif;
+  font-size:14px;
 }
 
 table {
   margin: 0px auto;
 }
 
+.controls{
+  text-align:center;
+  color: #aaa;
+}
+
+.players {
+  display: inline-block;
+  margin: 10px 60px;
+}
+
+.small{
+  font-size: 18px;
+}
+
 .box_cell {
-  border: 1px solid black;
-  width: 150px;
-  height: 150px;
-  border-radius: 75px;
+  border: 1px solid #aaa;
+  width: 120px;
+  height: 120px;
+  border-radius: 60px;
   opacity: .75;
-  box-shadow: 2px 2px 0px #888888
+  box-shadow: 2px 2px 0px #9cb2a5;
+  text-align: center;
+  color: #66a580;
 }
 
 .hover {
-  background-color: #aaa;
+  background-color: #9cb2a5;
+  cursor: pointer;
 }
 
-.red {
-  background-color: red;
-}
-
-.blue {
-  background-color: blue;
+.pointer {
+  cursor: pointer;
 }

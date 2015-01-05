@@ -4,8 +4,8 @@ if (<%= @player2.class == Player %>){
   turn.changeTurn();
 };
   
-  var cell = $('#box' + <%= @choice %>);
-  changeCellColor(cell);
+var cell = $('#box' + <%= @choice %>);
+markMovePosition(cell);
 
 var winner = checkWinner();
 if (winner !== undefined){
@@ -18,13 +18,15 @@ function checkWinner(){
   if ( (<%= @won ? @won : @won = false %>) !== false) {
     var winner = "tie";
     if(<%= @won %> === <%= @player1.id %>) {
-      winner = <%= @player1.id %>
+      return winner = <%= @player1.id %>
+    }
+    else if (<%= @won %> === <%= @player2.id %>) {
+      return winner = <%= @player2.id %>
     }
     else {
-      winner = <%= @player2.id %>
+      return winner;
     }
   };
-  return winner;
 };
 
 function getMessage(winner){
@@ -41,40 +43,16 @@ function endGame(message) {
   location.reload();
 }
 
-
-// Keep track of whose turn it is
-// var turn = {
-//   number : 0,
-//   currentPlayerColor : function() {
-//     if (this.number % 2 === 0) {
-//       return 1;
-//     }
-//     else {
-//       return 2;
-//     }
-//   },
-//   changeTurn : function(){
-//     this.number += 1;
-//   },
-//   getNumber : function(){
-//     return this.number;
-//   }
-// };
-
-
-function changeCellColor(cell) {
- // turn.changeTurn();
+function markMovePosition(cell) {
   // Change cell to the player color
   if (turn.currentPlayerColor() == 2){
     // Remove hover class immediately once clicked
     $(".box_cell").click(function () {
       $(this).removeClass("hover");
     });
-    $(cell).addClass('blue');
+    $(cell).find('i').addClass('fa fa-circle-o fa-5x');
    }
    else {
-    $(cell).addClass('red');
+     $(cell).find('i').addClass('fa fa-times fa-5x')
   }
-  //turn.changeTurn();
-  console.log("player in move js: " + turn.currentPlayerColor());
 }

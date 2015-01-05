@@ -26,10 +26,13 @@ function changeCell(cell) {
     $(".box_cell").click(function () {
       $(this).removeClass("hover");
     });
-    $(cell).addClass('red');
+   // debugger;
+    $(cell).find('i').addClass('fa fa-times fa-5x')
+   // $(cell).addClass('red');
   }
   else {
-    $(cell).addClass('blue');
+    $(cell).find('i').addClass('fa fa-circle-o fa-5x')
+   // $(cell).addClass('blue');
   }
 };
 
