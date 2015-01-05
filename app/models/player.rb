@@ -2,23 +2,18 @@ class Player
 
   attr_accessor :choice, :id, :board
 
-  def initialize(board)
+  def initialize(board, id)
     @board = board
     @choice = nil
-    @id = 0
+    @id = id
   end
 
   # find and perform the next move for a player, return true if game is over
   def next_move
 
-    # while !@board.validate(@choice)
-    #   puts "Please enter a (valid free) space to play on:"
-    #   @choice = gets.strip!.to_i - 1
-    # end
-
     @board.board[@choice] = id
     @board.free.delete(@choice)
-
+    p self 
     puts "player #{id + 1} chooses #{@choice}"
     puts @board
 

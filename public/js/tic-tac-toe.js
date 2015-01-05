@@ -1,5 +1,3 @@
-var board = [0,1,2,3,4,5,6,7,8]
-
 // Keep track of whose turn it is
 var turn = {
   number : 0,
@@ -13,31 +11,17 @@ var turn = {
   },
   changeTurn : function(){
     this.number += 1;
+  },
+  getNumber : function(){
+    return this.number;
   }
 };
 
 
-// End the game, alert the winner and refresh the page
-function endGame(message) {
-  alert(message);
-  location.reload();
-}
-
-// Check the value of a cell
-function checkCell(cell) {
-  var pos = $(cell).data("pos");
-
-  return(board[pos]);
-}
-
 function changeCell(cell) {
   // Change cell to the player color
-  var pos = $(cell).data("pos");
 
-  board[pos] = turn.currentPlayerColor();
-
-  console.log(turn.currentPlayerColor());
-  if (turn.currentPlayerColor() == 1){
+  if (turn.currentPlayerColor() == 2){
     // Remove hover class immediately once clicked
     $(".box_cell").click(function () {
       $(this).removeClass("hover");
@@ -47,8 +31,7 @@ function changeCell(cell) {
   else {
     $(cell).addClass('blue');
   }
-  turn.changeTurn();
-}
+};
 
 $(document).ready(function(){
   // Fix to make hover work correctly
@@ -60,31 +43,30 @@ $(document).ready(function(){
 
   // Take the appropriate action when a box is clicked
   $('.box_cell').click(function(){
+  //  turn.changeTurn();
     var position = $(this).data("pos");
     var cell = this;
-    changeCell(cell); 
-    console.log("player" + cell);
+    changeCell(cell);
         $.ajax({
         type: "GET",
         url: "/play",
-        data: { 'val': position },
+        data: { 'player': turn.currentPlayerColor(), 'val': position },
         success: function(){
-        //change color
         }
       });
-    // Check if cell is 0 on the board
-   // changeCell(this);
-
-  //   if (checkCell(this) === 0 && winningPlayer === 0) {
-  //     // Change color if it's 0
-  //     changeCell(this);
-  // };
   });
 
-  $('#computer-start').click(function(){
+    $('#computer-start').click(function(){
     $.ajax({
       type:"GET",
-      url: "/start"
+      url: "/start_one_player"
+    });
+  });
+
+    $('#players-start').click(function(){
+    $.ajax({
+      type:"GET",
+      url: "/start_two_players"
     });
   });
 

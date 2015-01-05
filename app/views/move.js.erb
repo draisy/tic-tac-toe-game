@@ -1,17 +1,21 @@
 //when assign var to function and when not?
 
-var cell = $('#box' + <%= @choice %>);
-changeCell(cell);
+if (<%= @player2.class == Player %>){
+  turn.changeTurn();
+};
+  
+  var cell = $('#box' + <%= @choice %>);
+  changeCellColor(cell);
 
 var winner = checkWinner();
-if (winner){
+if (winner !== undefined){
   var message = getMessage(winner);
   endGame(message);
 }
 
 
 function checkWinner(){
-  if (<%= @won ? @won : @won = false %>) {
+  if ( (<%= @won ? @won : @won = false %>) !== false) {
     var winner = "tie";
     if(<%= @won %> === <%= @player1.id %>) {
       winner = <%= @player1.id %>
@@ -28,7 +32,7 @@ function getMessage(winner){
     return "It's a draw!";
   }
   else {
-    return "Player " + winner + " wins!"
+    return "Player " + (winner += 1) + " wins!"
   }
 };
 
@@ -39,24 +43,27 @@ function endGame(message) {
 
 
 // Keep track of whose turn it is
-var turn = {
-  number : 0,
-  currentPlayerColor : function() {
-    if (this.number % 2 === 0) {
-      return 1;
-    }
-    else {
-      return 2;
-    }
-  },
-  changeTurn : function(){
-    this.number += 1;
-  }
-};
+// var turn = {
+//   number : 0,
+//   currentPlayerColor : function() {
+//     if (this.number % 2 === 0) {
+//       return 1;
+//     }
+//     else {
+//       return 2;
+//     }
+//   },
+//   changeTurn : function(){
+//     this.number += 1;
+//   },
+//   getNumber : function(){
+//     return this.number;
+//   }
+// };
 
 
-function changeCell(cell) {
-
+function changeCellColor(cell) {
+ // turn.changeTurn();
   // Change cell to the player color
   if (turn.currentPlayerColor() == 2){
     // Remove hover class immediately once clicked
@@ -68,5 +75,6 @@ function changeCell(cell) {
    else {
     $(cell).addClass('red');
   }
-  turn.changeTurn();
+  //turn.changeTurn();
+  console.log("player in move js: " + turn.currentPlayerColor());
 }

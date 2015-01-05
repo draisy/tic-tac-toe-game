@@ -15,9 +15,9 @@ class Computer
 
   attr_accessor :choice, :id, :board
 
-  def initialize(board)
+  def initialize(board, id)
     @board = board
-    @id = 1
+    @id = id
   end
 
   # find and perform the next move for a player, return true if game is over
@@ -27,7 +27,7 @@ class Computer
     @board.board[@choice] = id
     
     @board.free.delete(@choice)
-
+    p self
     puts "player #{id + 1} chooses #{@choice}"
     puts board
 
