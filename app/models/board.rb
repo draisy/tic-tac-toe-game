@@ -4,7 +4,7 @@ class Board
   def initialize
     # initially, all positions are free
     @free = (0..8).to_a.shuffle!
-    # initially, all fields are empty, i.e. they have arbitrary but distinct values that are also different from ID_USER and ID_COMP.
+    # initially, all fields are empty, i.e. they have arbitrary but distinct values
     @board = (10..18).to_a
   end
 

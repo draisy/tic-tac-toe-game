@@ -7,7 +7,7 @@ class Computer
   WIN_SCORES = [10, -10]
   WIN_NONE = 0
 
-  # inital score values for loop (below and above of possible range for user and computer, respectively)
+  # inital score values for loop (outside of possible range)
   INIT_SCORES = [-1000, 1000]
 
   # helpful to switch between user and computer
@@ -25,9 +25,8 @@ class Computer
     minimax(self.id)
 
     @board.board[@choice] = id
-    
     @board.free.delete(@choice)
-    p self
+  
     puts "player #{id + 1} chooses #{@choice}"
     puts board
 
@@ -37,7 +36,7 @@ class Computer
   def minimax(id)
 
     # if there is a winner or the board is full, we're done.
-    won = @board.winner #temp var not to call method twice
+    won = @board.winner 
 
     return WIN_SCORES[won] if won
     return WIN_NONE if @board.free.empty?

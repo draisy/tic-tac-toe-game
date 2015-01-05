@@ -1,18 +1,22 @@
-//when assign var to function and when not?
+var cell = $('#box' + <%= @choice %>);
+updateCell(cell);
 
 if (<%= @player2.class == Player %>){
   turn.changeTurn();
+}
+else {
+  computerMove(cell);
 };
   
-var cell = $('#box' + <%= @choice %>);
-markMovePosition(cell);
-
 var winner = checkWinner();
 if (winner !== undefined){
   var message = getMessage(winner);
   endGame(message);
 }
 
+function computerMove(cell) {
+  $(cell).find('i').addClass('fa fa-circle-o fa-5x');
+};
 
 function checkWinner(){
   if ( (<%= @won ? @won : @won = false %>) !== false) {
@@ -41,18 +45,4 @@ function getMessage(winner){
 function endGame(message) {
   alert(message);
   location.reload();
-}
-
-function markMovePosition(cell) {
-  // Change cell to the player color
-  if (turn.currentPlayerColor() == 2){
-    // Remove hover class immediately once clicked
-    $(".box_cell").click(function () {
-      $(this).removeClass("hover");
-    });
-    $(cell).find('i').addClass('fa fa-circle-o fa-5x');
-   }
-   else {
-     $(cell).find('i').addClass('fa fa-times fa-5x')
-  }
-}
+};

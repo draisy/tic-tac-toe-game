@@ -4,43 +4,46 @@
   <link href="/stylesheets/style.css" rel="stylesheet" type="text/css" />
   <link href='http://fonts.googleapis.com/css?family=Permanent+Marker' rel='stylesheet' type='text/css'>
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
   <script type="text/javascript" src="/js/tic-tac-toe.js"></script>
 </head>
 
 <body>
-  <div id="main_container">
-    <h1 id="main_heading" class="heading" >Tic Tac Toe!</h1>
+  <div id="main-container">
+    <h1 class="header" >Tic Tac Toe!</h1>
     <div class="controls">
       <div class="players pointer" id="players-start">
         <i class="fa fa-user fa-3x"></i><p>Two Player Game</p>
       </div>
-      <div class="players pointer" id-"computer-start">
+      <div class="players pointer" id="computer-start">
         <i class="fa fa-laptop fa-3x"></i><p>One Player Game</p>
       </div>
     </div>
     <table>
       <tbody>
-        <tr class="box_row" >
-          <td id="box0" class="box_cell" data-pos="0"><i></i></td>
+        <tr class="box-row" >
+          <td id="box0" class="cell" data-pos="0"><i></i></td>
 
-          <td id="box1" class="box_cell" data-pos="1"><i></i></td>
+          <td id="box1" class="cell" data-pos="1"><i></i></td>
 
-          <td id="box2" class="box_cell" data-pos="2"><i></i></td>
+          <td id="box2" class="cell" data-pos="2"><i></i></td>
         </tr>
-        <tr class="box_row">
-          <td id="box3" class="box_cell" data-pos="3"><i></i></td>
+        <tr class="box-row">
+          <td id="box3" class="cell" data-pos="3"><i></i></td>
 
-          <td id="box4" class="box_cell" data-pos="4"><i></i></td>
+          <td id="box4" class="cell" data-pos="4"><i></i></td>
 
-          <td id="box5" class="box_cell" data-pos="5"><i></i></td>
+          <td id="box5" class="cell" data-pos="5"><i></i></td>
         </tr>
-        <tr class="box_row">
-          <td id="box6" class="box_cell" data-pos="6"><i></i></td>
+        <tr class="box-row">
+          <td id="box6" class="cell" data-pos="6"><i></i></td>
 
-          <td id="box7" class="box_cell" data-pos="7"><i></i></td>
+          <td id="box7" class="cell" data-pos="7"><i></i></td>
 
-          <td id="box_8" class="box_cell" data-pos="8"><i></i></td>
+          <td id="box8" class="cell" data-pos="8"><i></i></td>
         </tr>
       </tbody>
     </table>
