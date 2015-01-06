@@ -33,7 +33,27 @@ table {
 
 .players {
   display: inline-block;
-  margin: 10px 60px;
+  margin: 10px 50px;
+}
+
+.restart {
+  display: none;
+}
+
+.start {
+  display: inline-block;
+}
+
+#computer-restart {
+  display: none;
+}
+
+#go {
+  visibility: hidden;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 30px;
+  color: #66a580 ;
+  display: inline-block;
 }
 
 .small{

@@ -20,17 +20,45 @@ $(document).ready(function(){
       });
   });
 
-    $('#computer-start').click(function(){
+    $("#computer-start").click(function(){
     $.ajax({
       type:"GET",
-      url: "/start_one_player"
+      url: "/start_one_player",
+      success: function(){
+        setRestart();
+      }
     });
   });
 
-    $('#players-start').click(function(){
+    $("#players-start").click(function(){
     $.ajax({
       type:"GET",
-      url: "/start_two_players"
+      url: "/start_two_players",
+      success: function(){
+        setRestart();
+      }
+    });
+  });
+
+  $("#players-restart").click(function(){
+      $.ajax({
+      type:"GET",
+      url: "/start_two_players",
+      success: function(){
+        removeMoves();
+        setRestart();
+      }
+    });
+  });
+
+  $("#computer-restart").click(function(){
+      $.ajax({
+      type:"GET",
+      url: "/start_one_player",
+      success: function(){
+        removeMoves();
+        setRestart();
+      }
     });
   });
 
@@ -52,8 +80,38 @@ var turn = {
   }
 };
 
-function updateCell(cell) {
+function setRestart(){
+  loadStart();
+  swapIcons();
+}
 
+function loadStart(){
+  var go = document.getElementById("go")
+  go.style.visibility = "visible";
+}
+
+function removeMoves(){
+  var icons = $("i");
+
+  for (var i = 4; i < icons.length; i ++){
+      $(icons[i]).removeClass();
+  };
+};
+
+function swapIcons(){
+
+  var restartIcons = $(".restart");
+  for(var i = 0; i < restartIcons.length; i ++){
+    restartIcons[i].style.display = "inline-block";
+  };
+
+  var startIcons = $(".start");
+  for (var i = 0; i < startIcons.length; i ++ ){
+    startIcons[i].style.display = "none";
+  };
+}
+
+function updateCell(cell) {
   if (turn.currentPlayer() == 1){
     $(".cell").click(function () {
       $(this).removeClass("hover");
