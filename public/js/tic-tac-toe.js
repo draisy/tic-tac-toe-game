@@ -6,23 +6,22 @@ $(document).ready(function(){
     $(this).removeClass("hover");
   });
 
-  // Event handler when player selects a cell
+  // send player id and selected cell to server
   $('.cell').click(function(){
     var position = $(this).data("pos");
     var cell = this;
-    updateCell(cell);
-        $.ajax({
-        type: "GET",
-        url: "/play",
-        data: { 'player': turn.currentPlayer(), 'val': position },
-        success: function(){
-        }
-      });
+    $.ajax({
+      type: "GET",
+      url: "/play",
+      data: { 'player': turn.currentPlayer(), 'val': position },
+      success: function(){
+      }
+    });
   });
 
   $("#computer-start").click(function(){
-       addFirstPlayerIcons();
-       loadStart();
+    addFirstPlayerIcons();
+    loadStart();
   });
 
   $("#players-start").click(function(){
@@ -36,13 +35,13 @@ $(document).ready(function(){
   });
 
   $("#players-restart").click(function(){
-      $.ajax({
+    $.ajax({
       type:"GET",
       url: "/start_two_players",
       success: function(){
         removeMoves();
         setRestart();
-      }
+       }
     });
   });
 
@@ -52,19 +51,28 @@ $(document).ready(function(){
   });
 
   $("#computer-first").click(function(){
-      $.ajax({
+    $.ajax({
       type:"GET",
       url: "/start_computer",
+      beforeSend: function(){
+        //reset turn count
+        turn.number = 0;
+      },
       success: function(){
         setRestart();
         removeFirstIcons();
+        turn.changeTurn();
       }
     });
   });
 
   $("#player-first").click(function(){
     $.ajax({
-    type:"GET",
+      type:"GET",
+      beforeSend: function(){
+        //reset turn count
+        turn.number = 0;
+      },
     url: "/start_player",
     success: function(){
       setRestart();
@@ -79,7 +87,7 @@ $(document).ready(function(){
 
 });
 
-// Keep track of whose turn it is
+// Keep track of current player turn
 var turn = {
   number : 0,
   currentPlayer : function() {
@@ -94,6 +102,8 @@ var turn = {
     this.number += 1;
   }
 };
+
+/***** functions to load the game board *****/
 
 function setRestart(){
   loadGo();
@@ -111,6 +121,8 @@ function swapRestartIconsIn(){
     restartIcons[i].style.display = "inline-block";
   };
   removeStartIcons();
+  hideTie();
+  hideWin();
 };
 
 function removeStartIcons(){
@@ -128,6 +140,26 @@ function hideGo(){
 function loadStart(){
   var starts = document.getElementById("whostarts")
   starts.style.visibility = "visible";
+}
+
+function loadTie(){
+  var starts = document.getElementById("tie")
+  starts.style.visibility = "visible";
+}
+
+function loadWin(){
+  var starts = document.getElementById("win")
+  starts.style.visibility = "visible";
+}
+
+function hideTie(){
+  var starts = document.getElementById("tie")
+  starts.style.visibility = "hidden";
+}
+
+function hideWin(){
+  var starts = document.getElementById("win")
+  starts.style.visibility = "hidden";
 }
 
 function hideStart(){
@@ -169,18 +201,8 @@ function swapRestartIconsOut() {
   removeRestartIcons();
   addFirstPlayerIcons();
   hideGo();
+  hideTie();
+  hideWin();
   loadStart();
-};
-
-function updateCell(cell) {
-  if (turn.currentPlayer() == 1){
-    $(".cell").click(function () {
-      $(this).removeClass("hover");
-    });
-    $(cell).find('i').addClass('fa fa-times fa-5x');
-  }
-  else {
-    $(cell).find('i').addClass('fa fa-circle-o fa-5x');
-  }
 };
 

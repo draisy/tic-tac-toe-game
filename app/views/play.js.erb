@@ -1,24 +1,45 @@
-var cell = $('#box' + <%= @choice %>);
-
+//two-player game
 if (<%= @player1.class == Player && @player2.class == Player %>){
+  var cell = findCell(<%= @choice %>);
   updateCell(cell);
+  isGameOver();
   turn.changeTurn();
-}
-else {
-  turn.changeTurn();
-  updateCell(cell);
-  turn.changeTurn();
-};
-  
-var winner = checkWinner();
-if (winner !== undefined){
-  var message = getMessage(winner);
-  endGame(message);
 }
 
-function computerMove(cell) {
-  $(cell).find('i').addClass('fa fa-circle-o fa-5x');
+//for one-player, instantiate to impossible values so @moves isn't undefined at runtime
+else if (<%= @moves.nil? ? @moves = [100,100] : @moves %>){
+  //update if moves are within possible range
+  if (<%= @moves[0] < 9 %>){
+    <% @moves.each do |move| %>
+      turn.changeTurn();
+      var cell = findCell(<%= move %>);
+      updateCell(cell);
+    <% end %>
+
+    isGameOver();   
+  };
 };
+
+//add X or O to selected box
+function updateCell(cell) {
+  if (turn.currentPlayer() == 1){
+    $(".cell").click(function () {
+      $(this).removeClass("hover");
+    });
+    $(cell).find('i').addClass('fa fa-times fa-5x');
+  }
+  else {
+    $(cell).find('i').addClass('fa fa-circle-o fa-5x');
+  }
+};
+
+function isGameOver(){
+  var winner = checkWinner();
+  if (winner !== undefined){
+    var message = getMessage(winner);
+    endGame(message);
+  };
+}
 
 function checkWinner(){
   if ( (<%= @won ? @won : @won = false %>) !== false) {
@@ -37,14 +58,22 @@ function checkWinner(){
 
 function getMessage(winner){
   if (winner === "tie"){
+    loadTie();
+    hideGo();
     return "It's a draw!";
   }
   else {
+    loadWin();
+    hideGo();
     return "Player " + (winner += 1) + " wins!"
   }
 };
 
 function endGame(message) {
   alert(message);
-  location.reload();
 };
+
+function findCell(position){
+  return $('#box' + position);
+};
+

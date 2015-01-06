@@ -1,3 +1,19 @@
-var cell = $('#box' + <%= @choice %>);
+var cell = findCell(<%= @choice %>)
 updateCell(cell);
-turn.changeTurn();
+
+//add X or O to selected box
+function updateCell(cell) {
+  if (turn.currentPlayer() == 1){
+    $(".cell").click(function () {
+      $(this).removeClass("hover");
+    });
+    $(cell).find('i').addClass('fa fa-times fa-5x');
+  }
+  else {
+    $(cell).find('i').addClass('fa fa-circle-o fa-5x');
+  }
+};
+
+function findCell(position){
+  return $('#box' + position);
+};

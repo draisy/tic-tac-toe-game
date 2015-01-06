@@ -26,7 +26,7 @@ class Computer
 
     @board.board[@choice] = id
     @board.free.delete(@choice)
-  
+    p self
     puts "player #{id + 1} chooses #{@choice}"
     puts @board
 

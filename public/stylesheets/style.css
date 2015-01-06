@@ -88,11 +88,18 @@ table {
   width: 20px;
   position: absolute;
   left: 43%;
-}
-
-#go {
+  margin-top: 3%;
   margin-left: 4%;
 }
+
+#whostarts {
+  margin: 0;
+}
+
+.win-tie {
+  color: #6b0000;
+}
+
 .small{
   font-size: 18px;
 }

@@ -21,4 +21,14 @@ class Game
     @player2 = Computer.new(@board, 1)
   end
 
+  def get_computer_moves_first
+    @won = @player2.next_move
+    @won ? @won : @won = @player1.next_move
+  end
+
+  def get_player_moves_first
+    @won = @player1.next_move
+    @won ? @won : @won = @player2.next_move
+  end
+
 end
