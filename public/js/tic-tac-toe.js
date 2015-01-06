@@ -62,6 +62,10 @@ $(document).ready(function(){
     });
   });
 
+  $("#instructions").click(function(){
+    $("#info").toggle()
+  })
+
 });
 
 // Keep track of whose turn it is
