@@ -1,4 +1,4 @@
-tic-tac-toe-game
+Tic Tac Toe!
 ================
 
 You can beat each other, but you can't beat the computer. Try winning this simple game against this AI mastermind, but it's not going to happen. Or play with your friends and win. Your choice. 
