@@ -51,7 +51,7 @@ table {
 
 .nav {
   position: absolute;
-  top: 5%;
+  top: 0;
   color: #6b0000;
   text-align: center;
 }
@@ -60,7 +60,7 @@ table {
 }
 
 .nav p {
-  margin-top:-2px;
+  margin-left:-30%;
 }
 .info {
   left: 15%;
