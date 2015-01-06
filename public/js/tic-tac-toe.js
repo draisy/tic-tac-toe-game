@@ -20,17 +20,12 @@ $(document).ready(function(){
       });
   });
 
-    $("#computer-start").click(function(){
-    $.ajax({
-      type:"GET",
-      url: "/start_one_player",
-      success: function(){
-        setRestart();
-      }
-    });
+  $("#computer-start").click(function(){
+       addFirstPlayerIcons();
+       loadStart();
   });
 
-    $("#players-start").click(function(){
+  $("#players-start").click(function(){
     $.ajax({
       type:"GET",
       url: "/start_two_players",
@@ -52,19 +47,34 @@ $(document).ready(function(){
   });
 
   $("#computer-restart").click(function(){
+    swapRestartIconsOut();
+  });
+
+  $("#computer-first").click(function(){
       $.ajax({
       type:"GET",
-      url: "/start_one_player",
+      url: "/start_computer",
       success: function(){
-        removeMoves();
         setRestart();
+        removeFirstIcons();
+      }
+    });
+  });
+
+  $("#player-first").click(function(){
+    $.ajax({
+    type:"GET",
+    url: "/start_player",
+    success: function(){
+      setRestart();
+      removeFirstIcons();
       }
     });
   });
 
   $("#instructions").click(function(){
     $("#info").toggle()
-  })
+  });   
 
 });
 
@@ -85,35 +95,82 @@ var turn = {
 };
 
 function setRestart(){
-  loadStart();
-  swapIcons();
+  loadGo();
+  swapRestartIconsIn();
+}
+
+function loadGo(){
+  var go = document.getElementById("go")
+  go.style.visibility = "visible";
+}
+
+function hideGo(){
+  var go = document.getElementById("go")
+  go.style.visibility = "hidden";
 }
 
 function loadStart(){
-  var go = document.getElementById("go")
-  go.style.visibility = "visible";
+  var starts = document.getElementById("whostarts")
+  starts.style.visibility = "visible";
+}
+
+function hideStart(){
+  var starts = document.getElementById("whostarts")
+  starts.style.visibility = "hidden";
 }
 
 function removeMoves(){
   var icons = $("i");
 
-  for (var i = 4; i < icons.length; i ++){
+  for (var i = 6; i < icons.length; i ++){
       $(icons[i]).removeClass();
   };
 };
 
-function swapIcons(){
-
+function removeRestartIcons(){
   var restartIcons = $(".restart");
   for(var i = 0; i < restartIcons.length; i ++){
-    restartIcons[i].style.display = "inline-block";
-  };
+    restartIcons[i].style.display = "none";
+  };  
+};
 
+function removeStartIcons(){
   var startIcons = $(".start");
   for (var i = 0; i < startIcons.length; i ++ ){
     startIcons[i].style.display = "none";
   };
+};
+
+function removeFirstIcons(){
+  var firstIcons = $(".first");
+  for(var i = 0; i < firstIcons.length; i ++){
+    firstIcons[i].style.display = "none";
+  };
+  hideStart();
 }
+
+function addFirstPlayerIcons(){
+  var firstIcons = $(".first");
+  for(var i = 0; i < firstIcons.length; i ++){
+    firstIcons[i].style.display = "inline-block";
+  };
+  removeStartIcons();
+};
+
+function swapRestartIconsIn(){
+  var restartIcons = $(".restart");
+  for(var i = 0; i < restartIcons.length; i ++){
+    restartIcons[i].style.display = "inline-block";
+  };
+  removeStartIcons();
+};
+
+function swapRestartIconsOut() {
+  removeRestartIcons();
+  addFirstPlayerIcons();
+  hideGo();
+  loadStart();
+};
 
 function updateCell(cell) {
   if (turn.currentPlayer() == 1){

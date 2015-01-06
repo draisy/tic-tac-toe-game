@@ -1,11 +1,13 @@
 var cell = $('#box' + <%= @choice %>);
-updateCell(cell);
 
-if (<%= @player2.class == Player %>){
+if (<%= @player1.class == Player && @player2.class == Player %>){
+  updateCell(cell);
   turn.changeTurn();
 }
 else {
-  computerMove(cell);
+  turn.changeTurn();
+  updateCell(cell);
+  turn.changeTurn();
 };
   
 var winner = checkWinner();

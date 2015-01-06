@@ -29,11 +29,12 @@ table {
 .controls{
   text-align:center;
   color: #aaa;
+  position: relative;
 }
 
 .players {
   display: inline-block;
-  margin: 10px 50px;
+  margin: 10px 60px;
 }
 
 .restart {
@@ -42,6 +43,10 @@ table {
 
 .start {
   display: inline-block;
+}
+
+.first {
+  display: none;
 }
 
 .instructions {
@@ -68,14 +73,20 @@ table {
   display: none;
 }
 
-#go {
+.game-text {
   visibility: hidden;
   font-family: 'Permanent Marker', cursive;
   font-size: 30px;
   color: #66a580 ;
   display: inline-block;
+  width: 20px;
+  position: absolute;
+  left: 43%;
 }
 
+#go {
+  margin-left: 4%;
+}
 .small{
   font-size: 18px;
 }
