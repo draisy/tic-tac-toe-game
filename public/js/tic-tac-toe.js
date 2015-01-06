@@ -47,6 +47,7 @@ $(document).ready(function(){
   });
 
   $("#computer-restart").click(function(){
+    removeMoves();
     swapRestartIconsOut();
   });
 
@@ -72,8 +73,8 @@ $(document).ready(function(){
     });
   });
 
-  $("#instructions").click(function(){
-    $("#info").toggle()
+  $("#info").click(function(){
+    $("#instructions").toggle()
   });   
 
 });
@@ -104,6 +105,21 @@ function loadGo(){
   go.style.visibility = "visible";
 }
 
+function swapRestartIconsIn(){
+  var restartIcons = $(".restart");
+  for(var i = 0; i < restartIcons.length; i ++){
+    restartIcons[i].style.display = "inline-block";
+  };
+  removeStartIcons();
+};
+
+function removeStartIcons(){
+  var startIcons = $(".start");
+  for (var i = 0; i < startIcons.length; i ++ ){
+    startIcons[i].style.display = "none";
+  };
+};
+
 function hideGo(){
   var go = document.getElementById("go")
   go.style.visibility = "hidden";
@@ -121,33 +137,10 @@ function hideStart(){
 
 function removeMoves(){
   var icons = $("i");
-
-  for (var i = 6; i < icons.length; i ++){
+  for (var i = 8; i < icons.length; i ++){
       $(icons[i]).removeClass();
   };
 };
-
-function removeRestartIcons(){
-  var restartIcons = $(".restart");
-  for(var i = 0; i < restartIcons.length; i ++){
-    restartIcons[i].style.display = "none";
-  };  
-};
-
-function removeStartIcons(){
-  var startIcons = $(".start");
-  for (var i = 0; i < startIcons.length; i ++ ){
-    startIcons[i].style.display = "none";
-  };
-};
-
-function removeFirstIcons(){
-  var firstIcons = $(".first");
-  for(var i = 0; i < firstIcons.length; i ++){
-    firstIcons[i].style.display = "none";
-  };
-  hideStart();
-}
 
 function addFirstPlayerIcons(){
   var firstIcons = $(".first");
@@ -157,13 +150,20 @@ function addFirstPlayerIcons(){
   removeStartIcons();
 };
 
-function swapRestartIconsIn(){
+function removeRestartIcons(){
   var restartIcons = $(".restart");
   for(var i = 0; i < restartIcons.length; i ++){
-    restartIcons[i].style.display = "inline-block";
-  };
-  removeStartIcons();
+    restartIcons[i].style.display = "none";
+  };  
 };
+
+function removeFirstIcons(){
+  var firstIcons = $(".first");
+  for(var i = 0; i < firstIcons.length; i ++){
+    firstIcons[i].style.display = "none";
+  };
+  hideStart();
+}
 
 function swapRestartIconsOut() {
   removeRestartIcons();

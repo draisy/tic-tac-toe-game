@@ -49,19 +49,25 @@ table {
   display: none;
 }
 
-.instructions {
+.nav {
   position: absolute;
-  top: 0;
-  right: 15%;
+  top: 5%;
   color: #6b0000;
   text-align: center;
 }
-
-.instructions p{
-  margin-top: -2px;
+.home {
+  left: 10%;
 }
 
-#info {
+.nav p {
+  margin-top:-2px;
+}
+.info {
+  left: 15%;
+}
+
+#instructions {
+  position: absolute;
   display: none;
   z-index: 2;
   width: 200px;
