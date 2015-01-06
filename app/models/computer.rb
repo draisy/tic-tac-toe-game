@@ -28,9 +28,9 @@ class Computer
     @board.free.delete(@choice)
   
     puts "player #{id + 1} chooses #{@choice}"
-    puts board
+    puts @board
 
-    board.free.empty? || board.winner
+    @board.winner || @board.free.empty?
   end
 
   def minimax(id)

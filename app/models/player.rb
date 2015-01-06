@@ -17,7 +17,7 @@ class Player
     puts "player #{id + 1} chooses #{@choice}"
     puts @board
 
-    @board.free.empty? || @board.winner
+    @board.winner || @board.free.empty?
   end
 
 end
